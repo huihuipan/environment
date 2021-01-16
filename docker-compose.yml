@@ -1,34 +1,41 @@
 version: "3"
 
 services:
-  redis:
-    container_name: dev-redis
-    build:
-      context: ./dockerfile/redis
-    ports: 
-      - 6379:6379
-  
-  mongo:
-    container_name: dev-mongo4.4
-    build: 
-      context: ./dockerfile/mongo
-    ports:
-      - 27017:27017
-    volumes: 
-      - ./data/mongo/data:/data/db
 
+  ### MYSQL ################################################
   mysql:
     container_name: dev-mysql8.0
     build:
       context: ./dockerfile/mysql
+      args:
+        - TZ=Asia/Shanghai
+    environment:
+      - MYSQL_ROOT_PASSWORD=888888
     ports:
-      - 3306:3306
-    volumes: 
-      - ./data/mysql/data:/var/lib/mysql 
-      - ./data/mysql/config/my.cnf:/etc/mysql/my.cnf 
-    environment: 
-      - MYSQL_ROOT_PASSWORD=123456
+      - "3306:3306"
+    volumes:
+      - ./data/mysql/data:/var/lib/mysql
     command:
       --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_general_ci
+
+  ### Redis ################################################
+  redis:
+    container_name: dev-redis
+    build:
+      context: ./dockerfile/redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data/redis/data:/data
+
+  ### MongoDB ##############################################
+  mongo:
+    container_name: dev-mongo4.4
+    build:
+      context: ./dockerfile/mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/mongo/data:/data

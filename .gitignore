@@ -1,3 +1,4 @@
 .env
 /data/mongo/data
 /data/mysql/data
+/data/redis/data
