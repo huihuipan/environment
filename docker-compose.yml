@@ -14,7 +14,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./data/mysql/data:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql
     command:
       --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4
@@ -28,7 +28,7 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - ./data/redis/data:/data
+      - ./data/redis:/data
 
   ### MongoDB ##############################################
   mongo:
@@ -38,4 +38,4 @@ services:
     ports:
       - "27017:27017"
     volumes:
-      - ./data/mongo/data:/data
+      - ./data/mongo:/data
