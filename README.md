@@ -14,10 +14,6 @@ git clone https://github.com/huihuipan/dev-sql.git
 # 进入项目目录
 cd dev-sql
 
-# 新建文件夹用于数据持久化
-mkdir data
-cd data
-mkdir mysql mongo redis
 ```
 
 ## 使用

@@ -1,4 +1,6 @@
 .env
-/data/mongo/data
-/data/mysql/data
-/data/redis/data
+/data/mongo/*
+/data/mysql/*
+/data/redis/*
+
+!*.gitkeep
