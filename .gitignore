@@ -2,5 +2,10 @@
 /data/mongo/*
 /data/mysql/*
 /data/redis/*
+/data/nginx/*
+
+!/data/nginx/conf/nginx.conf
+!/data/nginx/conf.d/default.conf
+!/data/nginx/html/index.html
 
 !*.gitkeep

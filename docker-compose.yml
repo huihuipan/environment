@@ -2,6 +2,19 @@ version: "3"
 
 services:
 
+  ### NGINX ################################################
+  nginx:
+    container_name: dev-nginx
+    build: 
+      context: ./dockerfile/nginx
+    ports: 
+      - "80:80"
+    volumes:
+      - ./data/nginx/html:/usr/share/nginx/html 
+      - ./data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf 
+      - ./data/nginx/logs:/var/log/nginx 
+      - ./data/nginx/conf.d:/etc/nginx/conf.d 
+
   ### MYSQL ################################################
   mysql:
     container_name: dev-mysql8.0
