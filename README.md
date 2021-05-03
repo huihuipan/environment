@@ -35,4 +35,6 @@ docker-compose down
 
 ### 部署yapi
 参考 [https://github.com/Ryan-Miao/docker-yapi](https://github.com/Ryan-Miao/docker-yapi)
-huihuipan163@163.com"，密码："ymfe.org
+默认账号密码
+***account***: ```admin@admin.com```
+***pwd***: ```ymfe.org```
