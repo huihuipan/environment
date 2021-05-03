@@ -13,8 +13,12 @@ services:
       - ./data/nginx/html:/usr/share/nginx/html 
       - ./data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf 
       - ./data/nginx/logs:/var/log/nginx 
-      - ./data/nginx/conf.d:/etc/nginx/conf.d 
-
+      - ./data/nginx/conf.d:/etc/nginx/conf.d
+    depends_on: 
+      - yapi
+    networks:
+      - app-network
+  
   ### MYSQL ################################################
   mysql:
     container_name: dev-mysql8.0
@@ -52,3 +56,29 @@ services:
       - "27017:27017"
     volumes:
       - ./data/mongo:/data
+    networks:
+      - app-network
+
+  ### Yapi ########################
+  yapi:
+    container_name: dev-yapi
+    build:
+      context: ./dockerfile/yapi
+    # 第一次启动使用
+    # command: "yapi server"
+    # 之后使用下面的命令
+    command: "node /my-yapi/vendors/server/app.js"
+    volumes: 
+        - ./data/yapi:/my-yapi
+    ports: 
+      - 9090:9090
+      # - 9091:3000
+    depends_on: 
+      - mongo
+    networks:
+      - app-network
+  
+#######################
+networks:
+  app-network:
+    driver: bridge  

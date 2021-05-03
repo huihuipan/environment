@@ -3,6 +3,7 @@
 /data/mysql/*
 /data/redis/*
 /data/nginx/*
+/data/yapi/*
 
 !/data/nginx/conf/nginx.conf
 !/data/nginx/conf.d/default.conf
