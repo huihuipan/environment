@@ -4,6 +4,7 @@
 /data/redis/*
 /data/nginx/*
 /data/yapi/*
+/data/jenkins/*
 
 !/data/nginx/conf/nginx.conf
 !/data/nginx/conf.d/default.conf

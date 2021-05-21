@@ -16,6 +16,7 @@ services:
       - ./data/nginx/conf.d:/etc/nginx/conf.d
     depends_on: 
       - yapi
+      - jenkins
     networks:
       - app-network
   
@@ -78,6 +79,19 @@ services:
     networks:
       - app-network
   
+  ### Jenkins ###################
+  jenkins: 
+    container_name: dev-jenkins
+    build:
+      context: './dockerfile/jenkins'
+    volumes:  
+      - ./data/jenkins/jenkins_home:/var/jenkins_home
+    ports:
+      # - 8080:8080
+      - 50000:50000
+    networks:
+      - app-network
+
 #######################
 networks:
   app-network:
