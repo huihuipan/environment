@@ -14,12 +14,32 @@ services:
       - ./data/nginx/conf/nginx.conf:/etc/nginx/nginx.conf 
       - ./data/nginx/logs:/var/log/nginx 
       - ./data/nginx/conf.d:/etc/nginx/conf.d
+      - ./data/php/code:/usr/share/nginx/html/code
     depends_on: 
       - yapi
       - jenkins
+      - php
     networks:
       - app-network
   
+  ### PHP ##################################################
+  php:
+    container_name: dev-php8.0
+    build:
+      context: ./dockerfile/php
+      args:
+        - PHP_COMPOSER_URL=https://mirrors.aliyun.com/composer/composer.phar
+        - PHP_COMPOSER_REPO=https://mirrors.aliyun.com/composer/
+        - TZ=${TIMEZONE}
+    expose:
+      - "9000"
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./data/php/code:/usr/share/nginx/html/code
+    networks:
+      - app-network
+
   ### MYSQL ################################################
   mysql:
     container_name: dev-mysql8.0

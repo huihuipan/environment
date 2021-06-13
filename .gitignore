@@ -2,12 +2,18 @@
 /data/mongo/*
 /data/mysql/*
 /data/redis/*
-/data/nginx/*
+# /data/nginx/*
 /data/yapi/*
 /data/jenkins/*
 
+/data/nginx/logs
 !/data/nginx/conf/nginx.conf
 !/data/nginx/conf.d/default.conf
+!/data/nginx/conf.d/jenkins.a.fun.conf
+!/data/nginx/conf.d/yapi.a.fun.conf
+!/data/nginx/conf.d/php.a.fun.conf
 !/data/nginx/html/index.html
+
+!/data/php/code/index.php
 
 !*.gitkeep
