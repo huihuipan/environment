@@ -4,7 +4,7 @@ services:
 
   ### NGINX ################################################
   nginx:
-    container_name: dev-nginx
+    container_name: nginx
     build: 
       context: ./dockerfile/nginx
     ports: 
@@ -15,34 +15,36 @@ services:
       - ./data/nginx/logs:/var/log/nginx 
       - ./data/nginx/conf.d:/etc/nginx/conf.d
       - ./data/php/code:/usr/share/nginx/html/code
+      - ~/Angwo/SHU_TONG/CODE/zjhj_bd_dev:/usr/share/nginx/html/shutong
     depends_on: 
       - yapi
       - jenkins
-      - php
+      # - php
     networks:
       - app-network
   
-  ### PHP ##################################################
-  php:
-    container_name: dev-php8.0
-    build:
-      context: ./dockerfile/php
-      args:
-        - PHP_COMPOSER_URL=https://mirrors.aliyun.com/composer/composer.phar
-        - PHP_COMPOSER_REPO=https://mirrors.aliyun.com/composer/
-        - TZ=${TIMEZONE}
-    expose:
-      - "9000"
-    ports:
-      - "9000:9000"
-    volumes:
-      - ./data/php/code:/usr/share/nginx/html/code
-    networks:
-      - app-network
+  ### PHP7.4 ##################################################
+  # php:
+  #   container_name: php74
+  #   build:
+  #     context: ./dockerfile/php74
+  #     args:
+  #       - PHP_COMPOSER_URL=https://mirrors.aliyun.com/composer/composer.phar
+  #       - PHP_COMPOSER_REPO=https://mirrors.aliyun.com/composer/
+  #       - TZ=${TIMEZONE}
+  #   expose:
+  #     - "9000"
+  #   ports:
+  #     - "9000:9000"
+  #   volumes:
+  #     - ./data/php/code:/usr/share/nginx/html/code
+  #     - ~/Angwo/SHU_TONG/CODE/zjhj_bd_dev:/usr/share/nginx/html/shutong
+  #   networks:
+  #     - app-network
 
   ### MYSQL ################################################
   mysql:
-    container_name: dev-mysql8.0
+    container_name: mysql8.0
     build:
       context: ./dockerfile/mysql
       args:
@@ -60,29 +62,32 @@ services:
 
   ### Redis ################################################
   redis:
-    container_name: dev-redis
+    container_name: redis
     build:
       context: ./dockerfile/redis
     ports:
       - "6379:6379"
     volumes:
       - ./data/redis:/data
+    networks: 
+      - app-network
 
   ### MongoDB ##############################################
   mongo:
-    container_name: dev-mongo4.4
+    container_name: mongo4.4
     build:
       context: ./dockerfile/mongo
     ports:
       - "27017:27017"
     volumes:
-      - ./data/mongo:/data
+      - ./data/mongo/db:/data/db
+      - ./data/mongo/configdb:/data/configdb
     networks:
       - app-network
 
   ### Yapi ########################
   yapi:
-    container_name: dev-yapi
+    container_name: yapi
     build:
       context: ./dockerfile/yapi
     # 第一次启动使用
@@ -101,7 +106,7 @@ services:
   
   ### Jenkins ###################
   jenkins: 
-    container_name: dev-jenkins
+    container_name: jenkins
     build:
       context: './dockerfile/jenkins'
     volumes:  
