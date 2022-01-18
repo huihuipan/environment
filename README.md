@@ -9,10 +9,10 @@
 
 ```shell
 # 克隆本项目
-git clone https://github.com/huihuipan/dev-sql.git
+git clone git@github.com:huihuipan/environment.git
 
 # 进入项目目录
-cd dev-sql
+cd environment
 
 ```
 
